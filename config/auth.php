@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token', // <== pastikan ini
+            'driver' => 'session', // <== pastikan ini
             'provider' => 'users',
             'hash' => false,
         ],

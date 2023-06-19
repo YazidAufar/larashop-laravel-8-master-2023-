@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -81,13 +83,25 @@ Route::middleware('throttle:5,1')->group(function () {
 // });
 
 Route::prefix('v1')->group(function () {
-    Route::get('books', 'App\Http\Controllers\APIBookController@index');
-    Route::get('book/{id}', 'App\Http\Controllers\APIBookController@view')->where('id', '[0-9]+');
+        // public
+        Route::post('login', 'App\Http\Controllers\AuthController@login');
+        Route::post('register', 'App\Http\Controllers\AuthController@register');
 
-    Route::post('login', 'App\Http\Controllers\AuthController@login');
+        Route::get('books', 'App\Http\Controllers\APIBookController@index');
+        Route::get('book/{id}', 'App\Http\Controllers\APIBookController@view')->where('id', '[0-9]+');
 
-    Route::post('register', 'App\Http\Controllers\AuthController@register');
-    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+        Route::get('categories/random/{count}', 'App\Http\Controllers\APICategoryController@random');
+        Route::get('books/top/{count}', 'App\Http\Controllers\APIBookController@top');
+
+        // auth
+        Route::middleware(['auth:api'])->group(function () {
+            Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+
+            //...
+        });
+
+
+
 });
 
 

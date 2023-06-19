@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+
+
+use App\Http\Resources\Categories as CategoryResourceCollection;
+
 
 class APICategoryController extends Controller
 {
@@ -80,5 +85,16 @@ class APICategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function random($count)
+    {
+        $criteria = Category::select('*')
+            ->inRandomOrder()
+            ->limit($count)
+            ->get();
+        return new CategoryResourceCollection($criteria);
+
+
     }
 }
