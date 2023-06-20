@@ -78,6 +78,8 @@ Route::middleware('throttle:5,1')->group(function () {
     Route::get('buku/{judul}', 'App\Http\Controllers\APIBookController@cetak');
 });
 
+
+
 // Route::middleware(['cors'])->group(function () {
 //     Route::get('buku/{judul}', 'App\Http\Controllers\APIBookController@cetak');
 // });
